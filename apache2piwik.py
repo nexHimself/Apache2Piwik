@@ -25,6 +25,7 @@ import time
 from hashlib import md5
 import pygeoip
 from src.uasparser import UASparser  
+import gzip
 
 
 #############################################################################
@@ -707,7 +708,10 @@ def apache2piwik(d):
         print 'Started processing '+d+apache_log_file+' file...'
         tstart = datetime.now()
         try:
-            f = open(apache_log_file,'r')
+            if apache_log_file.endswith('.gz'):
+                f = gzip.open(apache_log_file,'r')
+            else:
+                f = open(apache_log_file,'r')
         except IOError, e:
             print str(e).replace('[Errno 2] ','')
             sys.exit(0)
