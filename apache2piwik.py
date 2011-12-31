@@ -29,6 +29,7 @@ except ImportError:
     import GeoIP as pygeoip
 from src.uasparser import UASparser  
 import gzip
+import urllib2
 
 
 #############################################################################
@@ -343,6 +344,8 @@ def analize_visit(match,visitor):
     visitor['referer_url'] = match['referer']
     if visitor['referer_url']=='-':
         visitor['referer_type'] = 1
+    else:
+        visitor['referer_name'] = urllib2.urlparse.urlparse(visitor['referer_url']).netloc
 
     for key in referers_key:
         if referers[key]['regexpr'].search(match['referer'] ):
