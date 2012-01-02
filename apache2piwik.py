@@ -37,6 +37,7 @@ import urllib2
 
 CONTINUE = s.CONTINUE
 ID_SITE = s.ID_SITE
+DEFAULT_HOST = s.DEFAULT_HOST
 APACHE_LOG_FILES = s.APACHE_LOG_FILES
 CHRONOLOGICAL_ORDER = s.CHRONOLOGICAL_ORDER
 
@@ -297,6 +298,11 @@ def define_visit(match,line):
 
     try:
         visitor['idaction_url'] = match['url']
+        if DEFAULT_HOST:
+            (scheme, netloc, path, params, query, fragment) = urllib2.urlparse.urlparse(visitor['idaction_url'])
+            scheme = not(scheme) and 'http' or scheme
+            netloc = not(netloc) and DEFAULT_HOST or netloc
+            visitor['idaction_url'] = urllib2.urlparse.urlunparse( (scheme, netloc, path, params, query, fragment) )
     except KeyError:
         visitor['idaction_url'] = ''
 
@@ -816,6 +822,7 @@ if __name__ == "__main__":
     parser.add_option("-c", "--continue", type="int", dest="CONTINUE",
                       help="if you want to run script more than one time on one set of data (overrides CONTINUE)", metavar="{0 or 1}")
     parser.add_option("-i", "--id_site", type="int", dest='ID_SITE', metavar="INT", help="Piwik id site (overrides ID_SITE)")
+    parser.add_option("--default_host", type="string", dest='DEFAULT_HOST', metavar="STRING", help="Default server host name (overrides DEFAULT_HOST)")
     parser.add_option("-r", "--remove_cache", action="store_true", dest='REMOVE', help="Remove cache files")
     parser.add_option("-g", "--goal", action="store_true", dest='GOAL', help="Create data for goals")
     (options, args) = parser.parse_args()
@@ -832,6 +839,7 @@ if __name__ == "__main__":
 
     CONTINUE = options.CONTINUE is None and CONTINUE or bool(options.CONTINUE)
     ID_SITE = options.ID_SITE is None and ID_SITE or options.ID_SITE
+    DEFAULT_HOST = options.DEFAULT_HOST is None and DEFAULT_HOST or options.DEFAULT_HOST
     APACHE_LOG_FILES = options.APACHE_LOG_FILES and options.APACHE_LOG_FILES or APACHE_LOG_FILES
     CHRONOLOGICAL_ORDER = options.CHRONOLOGICAL_ORDER is None and CHRONOLOGICAL_ORDER or bool(options.CHRONOLOGICAL_ORDER) 
 

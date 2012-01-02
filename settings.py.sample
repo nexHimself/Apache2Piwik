@@ -60,6 +60,9 @@ ID_SITE = 1
 # Maximum length of one visit, in seconds
 VISIT_LENGTH = 1800 
 
+# Default server host name to prepend to visited relative URLs
+DEFAULT_HOST = None
+
 
 ##############################################
 # Life processing
