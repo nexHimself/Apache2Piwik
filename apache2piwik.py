@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
 # Apache2Piwik - importing data to Piwik from apache logs 
