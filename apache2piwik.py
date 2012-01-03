@@ -81,7 +81,8 @@ def check_if_ignored(line,dic):
 DBC = False
 actions = {}
 ignored_browsers = re.compile('(spider|bot|Bot|Spider)')
-gi = pygeoip.GeoIP('lib/GeoIP.dat', pygeoip.MEMORY_CACHE)
+basePath = os.path.dirname(os.path.realpath(__file__))
+gi = pygeoip.GeoIP(os.path.join(basePath,'lib/GeoIP.dat'), pygeoip.MEMORY_CACHE)
 ignored_extensions = re.compile( ('('+'|'.join(s.IGNORED_EXTENSIONS)+')').replace('.','\.').replace('.js','.js[^p]'))
 downloaded_extensions = re.compile(('('+'|'.join(s.DOWNLOADED_EXTENSIONS)+')').replace('.','\.'))
 url_regexpr = re.compile(s.URL_REGEXPR)
