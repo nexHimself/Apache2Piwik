@@ -97,6 +97,11 @@ referers['Google'] = {'regexpr' : re.compile('.google.'), 'keyword' : re.compile
 referers['Bing'] = {'regexpr' : re.compile('bing.'), 'keyword' : re.compile('(&|\?)q=(?P<keywords>[^&]*)(&|$)'), 'type' : 2}
 referers['Yahoo!'] = {'regexpr' : re.compile('.yahoo.'), 'keyword' : re.compile('(&|\?)p=(?P<keywords>[^&]*)(&|$)'), 'type' : 2}
 referers['Ask'] = {'regexpr' : re.compile('ask.'), 'keyword' : re.compile('web?q=(?P<keywords>[^&]*)(&|$)'), 'type' : 2}
+referers['Yandex'] = {'regexpr' : re.compile('yandex.ru'), 'keyword' : re.compile(r'(&|\?)text=(?P<keywords>[^&]*)(&|$)'), 'type' : 2}
+referers['T-Online NavHelp'] = {'regexpr' : re.compile('navigationshilfe.t-online.de'), 'keyword' : re.compile(r'(&|\?)q=(?P<keywords>[^&]*)(&|$)'), 'type' : 2}
+referers['Google-like'] = {'regexpr' : re.compile(r'(search|suche).+(&|\?)q='), 'keyword' : re.compile(r'(&|\?)q=(?P<keywords>[^&]*)(&|$)'), 'type' : 2}
+referers['Web.de-like'] = {'regexpr' : re.compile(r'(search|suche).+(&|\?)su='), 'keyword' : re.compile(r'(&|\?)su=(?P<keywords>[^&]*)(&|$)'), 'type' : 2}
+referers['Freenet-like'] = {'regexpr' : re.compile(r'(search|suche).+(&|\?)query='), 'keyword' : re.compile(r'(&|\?)query=(?P<keywords>[^&]*)(&|$)'), 'type' : 2}
 referers_key = referers.keys()
 
 browsers = {"Firefox" : "FF",
